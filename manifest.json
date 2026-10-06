@@ -1,0 +1,21 @@
+{
+  "name": "Coach-KI",
+  "short_name": "Coach",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "description": "Fußball-Coach App mit KI-Training, Analyse und Entwicklung",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192x192/07111f/6ee7b7?text=C",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512x512/07111f/7dd3fc?text=C",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
