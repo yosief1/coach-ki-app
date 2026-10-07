@@ -7,40 +7,40 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Coach-KI</title>
-    <link rel="manifest" href="./manifest.json" />
     <style>
       :root {
-        --bg: #07111f;
-        --bg2: #0b1727;
-        --panel: rgba(16, 26, 38, 0.9);
-        --panel-2: rgba(11, 21, 31, 0.9);
+        --bg: #06111f;
+        --bg-2: #0d1b2a;
+        --panel: rgba(15, 24, 36, 0.92);
+        --panel-2: rgba(11, 19, 29, 0.92);
+        --card: rgba(19, 31, 46, 0.96);
+        --line: rgba(255,255,255,0.08);
         --primary: #6ee7b7;
         --primary-2: #34d399;
         --accent: #7dd3fc;
         --warning: #fbbf24;
         --danger: #f87171;
-        --text: #edf8ff;
+        --text: #edf7ff;
         --muted: #9bb3c9;
-        --line: rgba(255,255,255,0.08);
+        --shadow: 0 18px 50px rgba(0,0,0,0.28);
       }
 
       * { box-sizing: border-box; }
       html, body {
         margin: 0;
-        padding: 0;
-        background: linear-gradient(180deg, #07111f 0%, #0d1b2a 100%);
+        background: linear-gradient(180deg, #06111f 0%, #0b1727 100%);
         color: var(--text);
-        font-family: Inter, "Segoe UI", sans-serif;
+        font-family: Inter, "Segoe UI", Arial, sans-serif;
         min-height: 100%;
       }
 
       body {
         display: flex;
         justify-content: center;
-        padding: 18px 14px 30px;
+        padding: 18px 14px 32px;
       }
 
-      .app {
+      .app-shell {
         width: 100%;
         max-width: 440px;
         min-height: 100vh;
@@ -48,69 +48,110 @@
 
       .topbar {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        padding: 10px 6px 14px;
+        align-items: center;
+        padding: 8px 6px 16px;
       }
 
       .brand {
         display: flex;
         align-items: center;
         gap: 12px;
-        font-weight: 800;
+        font-weight: 900;
       }
 
       .logo {
         width: 38px;
         height: 38px;
-        border-radius: 12px;
-        background: linear-gradient(135deg, var(--primary), var(--accent));
         display: grid;
         place-items: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
         color: #07111f;
-        font-weight: 900;
       }
 
       .avatar {
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #dbeafe, #94a3b8);
-        color: #0b1320;
-        font-weight: 800;
         display: grid;
         place-items: center;
+        font-weight: 800;
+        color: #07111f;
+        background: linear-gradient(135deg, #dbeafe, #b9c3d1);
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
       }
 
       .hero {
-        border-radius: 28px;
-        background: linear-gradient(135deg, rgba(110,231,183,0.12), rgba(125,211,252,0.12));
+        background: linear-gradient(135deg, rgba(110, 231, 183, 0.12), rgba(125, 211, 252, 0.12));
+        border-radius: 26px;
+        padding: 18px 16px;
         border: 1px solid var(--line);
-        padding: 18px 16px 16px;
-        box-shadow: 0 18px 40px rgba(0,0,0,0.22);
       }
 
       .pill {
         display: inline-block;
-        padding: 8px 12px;
+        padding: 7px 12px;
         border-radius: 999px;
         background: rgba(110,231,183,0.12);
         border: 1px solid rgba(110,231,183,0.2);
         color: var(--primary);
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 800;
       }
 
-      h1 {
-        margin: 14px 0 10px;
-        font-size: 30px;
+      h1, h2, h3, p { margin: 0; }
+
+      .hero h1 {
+        margin-top: 12px;
+        font-size: 31px;
         line-height: 1.08;
       }
 
-      .subtitle {
+      .muted {
         color: var(--muted);
-        font-size: 14px;
+      }
+
+      .hero .muted {
+        margin-top: 10px;
         line-height: 1.5;
+        font-size: 14px;
+      }
+
+      .primary-btn, .secondary-btn, .ghost-btn, .small-btn {
+        border: none;
+        border-radius: 14px;
+        padding: 12px 14px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.15s ease transform;
+      }
+
+      .primary-btn:active, .secondary-btn:active, .ghost-btn:active, .small-btn:active {
+        transform: scale(0.98);
+      }
+
+      .primary-btn {
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        color: #07111f;
+      }
+
+      .secondary-btn {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--line);
+        color: var(--text);
+      }
+
+      .ghost-btn {
+        background: rgba(125,211,252,0.08);
+        border: 1px solid rgba(125,211,252,0.16);
+        color: var(--accent);
       }
 
       .cta-row {
@@ -119,82 +160,55 @@
         margin-top: 18px;
       }
 
-      button {
-        border: none;
-        border-radius: 14px;
-        padding: 12px 14px;
-        font-size: 14px;
-        font-weight: 800;
-        cursor: pointer;
-        transition: transform 0.15s ease;
-      }
-
-      button:active { transform: scale(0.98); }
-
-      .primary {
-        flex: 1;
-        color: #07111f;
-        background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      }
-
-      .secondary {
-        flex: 1;
-        background: rgba(255,255,255,0.04);
-        color: var(--text);
-        border: 1px solid var(--line);
-      }
-
-      .stats {
-        margin-top: 18px;
+      .stats-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 10px;
+        margin-top: 18px;
       }
 
-      .stat {
-        background: rgba(12,20,30,0.78);
+      .stat-box {
+        background: rgba(16,30,43,0.8);
         border: 1px solid var(--line);
         border-radius: 16px;
         padding: 12px 8px;
         text-align: center;
       }
 
-      .stat strong {
+      .stat-box strong {
         display: block;
         font-size: 18px;
         margin-bottom: 4px;
       }
 
-      .stat span {
+      .stat-box span {
         color: var(--muted);
         font-size: 11px;
       }
 
       .section-head {
-        margin: 24px 4px 12px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 22px 4px 12px;
         font-weight: 800;
       }
 
       .section-head small {
         color: var(--muted);
-        font-weight: 700;
       }
 
-      .cards {
+      .cards-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
       }
 
       .card {
-        background: var(--panel);
+        background: var(--card);
         border: 1px solid var(--line);
         border-radius: 22px;
         padding: 16px 14px;
-        box-shadow: 0 14px 28px rgba(0,0,0,0.12);
       }
 
       .icon {
@@ -203,28 +217,27 @@
         border-radius: 14px;
         display: grid;
         place-items: center;
-        font-size: 20px;
+        font-size: 22px;
         margin-bottom: 12px;
       }
 
-      .green { background: rgba(110,231,183,0.14); }
-      .blue { background: rgba(125,211,252,0.12); }
-      .yellow { background: rgba(251,191,36,0.12); }
-      .red { background: rgba(248,113,113,0.12); }
+      .icon.green { background: rgba(110,231,183,0.14); }
+      .icon.blue { background: rgba(125,211,252,0.12); }
+      .icon.yellow { background: rgba(251,191,36,0.12); }
+      .icon.red { background: rgba(248,113,113,0.12); }
 
       .card h3 {
-        margin: 0 0 8px;
         font-size: 15px;
+        margin-bottom: 8px;
       }
 
       .card p {
-        margin: 0;
         color: var(--muted);
-        font-size: 12px;
         line-height: 1.5;
+        font-size: 12px;
       }
 
-      .focus {
+      .focus-box {
         margin-top: 18px;
         background: var(--panel-2);
         border: 1px solid var(--line);
@@ -232,22 +245,22 @@
         padding: 16px;
       }
 
-      .focus-head {
+      .focus-box-head {
         display: flex;
-        align-items: center;
         justify-content: space-between;
+        align-items: center;
         margin-bottom: 12px;
       }
 
       .tag {
         display: inline-block;
-        color: var(--accent);
-        background: rgba(125,211,252,0.12);
-        border: 1px solid rgba(125,211,252,0.18);
+        padding: 5px 9px;
         border-radius: 999px;
-        padding: 6px 9px;
+        background: rgba(125,211,252,0.12);
+        color: var(--accent);
+        border: 1px solid rgba(125,211,252,0.18);
         font-size: 11px;
-        font-weight: 700;
+        font-weight: 800;
       }
 
       .task {
@@ -258,7 +271,7 @@
         border-top: 1px solid var(--line);
       }
 
-      .task:first-of-type {
+      .task:first-child {
         border-top: none;
         padding-top: 0;
       }
@@ -278,7 +291,6 @@
       .task-body strong {
         display: block;
         margin-bottom: 4px;
-        font-size: 14px;
       }
 
       .task-body span {
@@ -291,29 +303,30 @@
         padding: 5px 8px;
         border-radius: 999px;
         background: rgba(52,211,153,0.12);
-        border: 1px solid rgba(52,211,153,0.2);
+        border: 1px solid rgba(52,211,153,0.18);
         color: var(--primary);
       }
 
       .bottom-nav {
         position: sticky;
-        bottom: 14px;
-        margin-top: 20px;
+        bottom: 12px;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0,1fr));
         gap: 8px;
+        margin-top: 20px;
         background: rgba(5, 11, 18, 0.88);
         border: 1px solid var(--line);
         border-radius: 18px;
         padding: 8px;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(12px);
       }
 
       .nav-item {
         background: transparent;
         color: var(--muted);
-        font-size: 12px;
         padding: 10px 6px;
+        border-radius: 12px;
+        font-size: 12px;
       }
 
       .nav-item.active {
@@ -321,172 +334,1101 @@
         color: var(--text);
       }
 
-      .install-banner {
+      /* MODALS */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(4,9,15,0.72);
         display: none;
-        margin-top: 18px;
-        background: rgba(125,211,252,0.12);
-        border: 1px solid rgba(125,211,252,0.18);
-        color: var(--text);
-        border-radius: 16px;
-        padding: 12px 14px;
-        justify-content: space-between;
         align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 10;
+      }
+
+      .modal.visible {
+        display: flex;
+      }
+
+      .modal-card {
+        width: min(100%, 400px);
+        background: #0d1b2a;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .form-grid {
+        display: grid;
         gap: 12px;
       }
 
-      .install-banner.show {
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      label {
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        color: var(--text);
+        padding: 12px 14px;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .row {
         display: flex;
+        gap: 10px;
+      }
+
+      .hidden { display: none !important; }
+
+      .section {
+        display: none;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      .module-box {
+        margin-top: 18px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 16px;
+      }
+
+      .message-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .message {
+        padding: 12px 14px;
+        border-radius: 14px;
+        line-height: 1.5;
+        font-size: 14px;
+      }
+
+      .message.user {
+        background: rgba(110,231,183,0.12);
+        border: 1px solid rgba(110,231,183,0.18);
+      }
+
+      .message.ai {
+        background: rgba(125,211,252,0.08);
+        border: 1px solid rgba(125,211,252,0.16);
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .chip {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--line);
+        padding: 8px 10px;
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .mini-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .mini-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px 14px;
+      }
+
+      .mini-item strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .progress {
+        position: relative;
+        height: 10px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 999px;
+        overflow: hidden;
+        margin-top: 8px;
+      }
+
+      .progress > span {
+        position: absolute;
+        inset: 0 auto 0 0;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        border-radius: inherit;
+      }
+
+      .agent-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .agent {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 12px 14px;
+      }
+
+      .agent small {
+        color: var(--muted);
+      }
+
+      .status-pill {
+        display: inline-block;
+        padding: 5px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .status-pill.live {
+        background: rgba(110,231,183,0.12);
+        border: 1px solid rgba(110,231,183,0.2);
+        color: var(--primary);
+      }
+
+      .status-pill.ready {
+        background: rgba(125,211,252,0.12);
+        border: 1px solid rgba(125,211,252,0.18);
+        color: var(--accent);
+      }
+
+      .login-wrap, .register-wrap {
+        display: grid;
+        gap: 12px;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+      }
+
+      @media (max-width: 380px) {
+        .cards-grid { grid-template-columns: 1fr; }
+        .cta-row { flex-direction: column; }
       }
     </style>
   </head>
   <body>
-    <div class="app">
-      <div class="topbar">
-        <div class="brand">
-          <div class="logo">C</div>
-          <span>Coach-KI</span>
-        </div>
-        <div class="avatar">S</div>
-      </div>
-
-      <div id="installBanner" class="install-banner">
-        <span>App installieren</span>
-        <button id="installBtn" class="primary" style="padding: 10px 12px;">Installieren</button>
-      </div>
-
-      <section class="hero">
-        <div class="pill">Heute • 4 Prioritäten</div>
-        <h1>Dein Fußball-Coach auf dem Handy.</h1>
-        <div class="subtitle">
-          Beobachten, verstehen, trainieren, verbessern – alles in einem intelligenten Kreislauf.
-        </div>
-
-        <div class="cta-row">
-          <button class="primary" id="startBtn">Starten</button>
-          <button class="secondary">Plan ansehen</button>
-        </div>
-
-        <div class="stats">
-          <div class="stat">
-            <strong>7</strong>
-            <span>Trainings</span>
+    <div class="app-shell">
+      <div id="authScreen" class="section active">
+        <div class="topbar">
+          <div class="brand">
+            <div class="logo">C</div>
+            <span>Coach-KI</span>
           </div>
-          <div class="stat">
-            <strong>92%</strong>
-            <span>Stärke</span>
-          </div>
-          <div class="stat">
-            <strong>3</strong>
-            <span>Engpässe</span>
+          <div class="avatar">C</div>
+        </div>
+
+        <div class="hero">
+          <div class="pill">Fußball-Intelligenz</div>
+          <h1>Dein persönlicher Fußball-Coach.</h1>
+          <p class="muted">Training, Analyse, Entwicklung, Taktik und Matchplan – alles in einem intelligenten Kreislauf.</p>
+          <div class="cta-row">
+            <button class="primary-btn" id="showLoginBtn">Einloggen</button>
+            <button class="secondary-btn" id="showRegisterBtn">Registrieren</button>
           </div>
         </div>
-      </section>
 
-      <div class="section-head">
-        <span>Bereiche</span>
-        <small>Heute</small>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <div class="icon green">⚽</div>
-          <h3>Training</h3>
-          <p>Technik, Flanke, Schuss, 1v1, Passspiel.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon blue">🎥</div>
-          <h3>Analyse</h3>
-          <p>Video, Fehler, Bewegungsdaten und Spielphasen.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon yellow">📊</div>
-          <h3>Entwicklung</h3>
-          <p>Trend, Fortschritt, Konsistenz, Erfolge.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon red">🎯</div>
-          <h3>Ziele</h3>
-          <p>Woche, Monat, Saison und langfristige Ziele.</p>
+        <div class="module-box">
+          <h3>Warum Coach-KI?</h3>
+          <div class="chip-row">
+            <span class="chip">Persönliches Profil</span>
+            <span class="chip">Echte Trainerlogik</span>
+            <span class="chip">Trainingsplan</span>
+            <span class="chip">Fortschritt</span>
+            <span class="chip">KI-Coach</span>
+            <span class="chip">Matchprep</span>
+          </div>
         </div>
       </div>
 
-      <div class="focus">
-        <div class="focus-head">
-          <strong>Heutiger Fokus</strong>
-          <span class="tag">Priorität</span>
+      <div id="loginScreen" class="section hidden">
+        <div class="topbar">
+          <div class="brand">
+            <div class="logo">C</div>
+            <span>Einloggen</span>
+          </div>
+          <div class="avatar">S</div>
         </div>
 
-        <div class="task">
-          <div class="dot"></div>
-          <div class="task-body">
-            <strong>Flanke + Timing</strong>
-            <span>12 Wiederholungen • 2 Sätze</span>
+        <div class="panel" style="padding: 18px;">
+          <div class="login-wrap">
+            <div class="field">
+              <label for="loginEmail">E-Mail</label>
+              <input id="loginEmail" type="email" placeholder="dein@email.de" />
+            </div>
+            <div class="field">
+              <label for="loginPassword">Passwort</label>
+              <input id="loginPassword" type="password" placeholder="••••••••" />
+            </div>
+            <button class="primary-btn" id="loginBtn">Anmelden</button>
+            <button class="secondary-btn" id="backToAuthBtn">Zurück</button>
           </div>
-          <span class="status">aktiv</span>
-        </div>
-
-        <div class="task">
-          <div class="dot" style="background: var(--accent); box-shadow: 0 0 0 5px rgba(125,211,252,0.12);"></div>
-          <div class="task-body">
-            <strong>1v1 Entscheidung</strong>
-            <span>4 Situationen • Video-Check</span>
-          </div>
-          <span class="status" style="color: var(--accent); background: rgba(125,211,252,0.12); border-color: rgba(125,211,252,0.18);">neu</span>
-        </div>
-
-        <div class="task">
-          <div class="dot" style="background: var(--warning); box-shadow: 0 0 0 5px rgba(251,191,36,0.12);"></div>
-          <div class="task-body">
-            <strong>Schusspräzision</strong>
-            <span>5 Treffer • Fokus auf Komposition</span>
-          </div>
-          <span class="status" style="color: var(--warning); background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.15);">wartet</span>
         </div>
       </div>
 
-      <div class="bottom-nav">
-        <button class="nav-item active">Home</button>
-        <button class="nav-item">Coach</button>
-        <button class="nav-item">Training</button>
-        <button class="nav-item">Ziele</button>
+      <div id="registerScreen" class="section hidden">
+        <div class="topbar">
+          <div class="brand">
+            <div class="logo">C</div>
+            <span>Registrieren</span>
+          </div>
+          <div class="avatar">N</div>
+        </div>
+
+        <div class="panel" style="padding: 18px;">
+          <div class="register-wrap">
+            <div class="field">
+              <label for="regName">Name</label>
+              <input id="regName" type="text" placeholder="Max Mustermann" />
+            </div>
+            <div class="field">
+              <label for="regEmail">E-Mail</label>
+              <input id="regEmail" type="email" placeholder="dein@email.de" />
+            </div>
+            <div class="field">
+              <label for="regPassword">Passwort</label>
+              <input id="regPassword" type="password" placeholder="Mind. 6 Zeichen" />
+            </div>
+            <button class="primary-btn" id="registerBtn">Konto erstellen</button>
+            <button class="secondary-btn" id="backToAuth2Btn">Zurück</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="verificationScreen" class="section hidden">
+        <div class="topbar">
+          <div class="brand">
+            <div class="logo">C</div>
+            <span>Bestätigung</span>
+          </div>
+          <div class="avatar">V</div>
+        </div>
+
+        <div class="panel" style="padding: 18px;">
+          <div class="form-grid">
+            <h3>Bestätigungs-E-Mail</h3>
+            <p id="verificationInfo" class="muted">Ein Bestätigungscode wurde an deine E-Mail gesendet.</p>
+            <div class="field">
+              <label for="verificationCode">Bestätigungscode</label>
+              <input id="verificationCode" type="text" placeholder="123456" maxlength="6" />
+            </div>
+            <button class="primary-btn" id="confirmBtn">Bestätigen</button>
+            <button class="secondary-btn" id="resendBtn">Erneut senden</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="appScreen" class="section hidden">
+        <div class="topbar">
+          <div class="brand">
+            <div class="logo">C</div>
+            <span>Coach-KI</span>
+          </div>
+          <div class="avatar" id="topAvatar">S</div>
+        </div>
+
+        <div id="homeView" class="section active">
+          <section class="hero">
+            <div class="pill">Heute • 4 Prioritäten</div>
+            <h1 id="welcomeTitle">Hallo, Spieler.</h1>
+            <p class="muted" id="welcomeSubtitle">Dein persönlicher Fußball-KI-Plan wird automatisch aktualisiert.</p>
+            <div class="cta-row">
+              <button class="primary-btn" id="startTrainingBtn">Training starten</button>
+              <button class="secondary-btn" id="aiCoachBtn">Coach fragen</button>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <strong id="techValue">7.4</strong>
+                <span>Technik</span>
+              </div>
+              <div class="stat-box">
+                <strong id="tacticValue">6.8</strong>
+                <span>Taktik</span>
+              </div>
+              <div class="stat-box">
+                <strong id="athValue">8.1</strong>
+                <span>Athletik</span>
+              </div>
+            </div>
+          </section>
+
+          <div class="focus-box">
+            <div class="focus-box-head">
+              <strong>Heutiger Fokus</strong>
+              <span class="tag">Priorität</span>
+            </div>
+            <div id="focusList"></div>
+          </div>
+        </div>
+
+        <div id="coachView" class="section hidden">
+          <div class="module-box">
+            <h3>Coach</h3>
+            <div class="chip-row">
+              <span class="chip">Was trainiere ich?</span>
+              <span class="chip">Analysiere mein Spiel</span>
+              <span class="chip">Was ist mein größtes Problem?</span>
+            </div>
+            <div class="message-list" id="chatMessages"></div>
+            <div class="row" style="margin-top: 12px;">
+              <input id="coachInput" type="text" placeholder="Frage an den Coach..." />
+              <button class="primary-btn" id="sendCoachBtn" style="width: auto;">Senden</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="trainingView" class="section hidden">
+          <div class="module-box">
+            <h3>Training</h3>
+            <div id="trainingList" class="mini-list"></div>
+          </div>
+        </div>
+
+        <div id="analysisView" class="section hidden">
+          <div class="module-box">
+            <h3>Entwicklung</h3>
+            <div class="mini-list" id="analysisList"></div>
+          </div>
+        </div>
+
+        <div id="goalsView" class="section hidden">
+          <div class="module-box">
+            <h3>Ziele</h3>
+            <div class="mini-list" id="goalsList"></div>
+          </div>
+        </div>
+
+        <div id="profileView" class="section hidden">
+          <div class="module-box">
+            <h3>Profil & Spieler</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label>Position</label>
+                <select id="profilePosition">
+                  <option>Außenverteidiger</option>
+                  <option>Innenverteidiger</option>
+                  <option>Mittelfeld</option>
+                  <option>Flügel</option>
+                  <option>Stürmer</option>
+                  <option>Torwart</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Alter</label>
+                <input id="profileAge" type="number" min="10" max="40" value="18" />
+              </div>
+              <div class="field">
+                <label>Hauptziel</label>
+                <input id="profileGoal" type="text" value="Entscheidungsfindung und Flanken" />
+              </div>
+              <button class="primary-btn" id="saveProfileBtn">Profil speichern</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="teamView" class="section hidden">
+          <div class="module-box">
+            <h3>KI-Team</h3>
+            <div class="agent-list" id="agentsList"></div>
+          </div>
+        </div>
+
+        <div id="knowledgeView" class="section hidden">
+          <div class="module-box">
+            <h3>Wissen & Lernzentrum</h3>
+            <div class="mini-list" id="knowledgeList"></div>
+          </div>
+        </div>
+
+        <div id="calendarView" class="section hidden">
+          <div class="module-box">
+            <h3>Kalender</h3>
+            <div class="mini-list" id="calendarList"></div>
+          </div>
+        </div>
+
+        <nav class="bottom-nav">
+          <button class="nav-item active" data-target="homeView">Home</button>
+          <button class="nav-item" data-target="coachView">Coach</button>
+          <button class="nav-item" data-target="trainingView">Training</button>
+          <button class="nav-item" data-target="profileView">Profil</button>
+        </nav>
       </div>
     </div>
 
     <script>
-      const startBtn = document.getElementById("startBtn");
-      startBtn.addEventListener("click", () => {
-        alert("Coach-KI gestartet. Der Trainingsplan wird vorbereitet.");
-      });
+      const STORAGE_KEY = 'coachki_state_v1';
+      const EMPTY_STATE = {
+        users: [],
+        currentUser: null,
+        pendingVerification: null,
+        screen: 'auth'
+      };
 
-      let deferredPrompt;
+      const defaultUser = {
+        name: 'Yosief',
+        email: 'yosief@example.com',
+        password: '123456',
+        position: 'Außenverteidiger',
+        age: 18,
+        goal: 'Entscheidungsfindung & Flanken',
+        skills: { technique: 7.4, tactic: 6.8, athlete: 8.1, decision: 6.4 },
+        coachMessages: [
+          { role: 'ai', text: 'Deine Flanken sind stabil, aber in Übergängen ist die Entscheidung oft zu spät. Wir arbeiten heute gezielt an Tempo + Timing + Entscheidung.' },
+          { role: 'user', text: 'Was ist mein größtes Problem?' },
+          { role: 'ai', text: 'Die größte Chance liegt aktuell in Entscheidungsfindung und Flanke nach Bewegung. Nicht in der Technik an sich, sondern im Moment der Auswahl.' }
+        ],
+        training: [
+          { title: 'Flanke + Timing', detail: '12 Wiederholungen · 2 Sätze', done: false },
+          { title: '1v1 Entscheidung', detail: '4 Situationen · Video-Check', done: false },
+          { title: 'Sprint + Ballkontakt', detail: '8 Wiederholungen · Fokus Tempo', done: false },
+          { title: 'Passspiel unter Druck', detail: '6 Minuten · 3 Runden', done: false }
+        ],
+        goals: [
+          { title: 'Saisonziel', value: 'Stabilere Flanken und schnellere Entscheidung', done: false },
+          { title: 'Monatsziel', value: '2x Woche Entscheidungstraining', done: false },
+          { title: 'Wochenziel', value: '30 erfolgreiche Flanken in 3 Szenarien', done: false }
+        ],
+        focus: [
+          'Entscheidungsfindung',
+          'Flanke nach Bewegung',
+          '1v1 defensiv',
+          'Tempo + Wahrnehmung'
+        ]
+      };
 
-      const installBanner = document.getElementById("installBanner");
-      const installBtn = document.getElementById("installBtn");
+      function loadState() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          const initial = { ...EMPTY_STATE, users: [defaultUser], currentUser: defaultUser, pendingVerification: null };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
+          return initial;
+        }
+        try {
+          return JSON.parse(raw);
+        } catch (error) {
+          const fallback = { ...EMPTY_STATE, users: [defaultUser], currentUser: defaultUser, pendingVerification: null };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(fallback));
+          return fallback;
+        }
+      }
 
-      window.addEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        installBanner.classList.add("show");
-      });
+      function saveState(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
 
-      installBtn.addEventListener("click", async () => {
-        if (!deferredPrompt) return;
-        deferredPrompt.prompt();
-        await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        installBanner.classList.remove("show");
-      });
+      let state = loadState();
 
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker.register("./sw.js").catch(err => {
-            console.log("ServiceWorker registration failed:", err);
+      function showScreen(id) {
+        document.querySelectorAll('.section').forEach(el => {
+          if (el.id === 'appScreen' || el.id === 'authScreen' || el.id === 'loginScreen' || el.id === 'registerScreen' || el.id === 'verificationScreen') {
+            el.classList.add('hidden');
+          }
+        });
+
+        const outerScreens = ['authScreen', 'loginScreen', 'registerScreen', 'verificationScreen', 'appScreen'];
+        outerScreens.forEach(name => {
+          const el = document.getElementById(name);
+          if (el) {
+            if (name === id) {
+              el.classList.remove('hidden');
+              el.classList.add('active');
+            } else {
+              el.classList.add('hidden');
+              el.classList.remove('active');
+            }
+          }
+        });
+
+        if (id === 'appScreen') {
+          renderApp();
+        }
+      }
+
+      function showAuth() {
+        document.getElementById('authScreen').classList.remove('hidden');
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('registerScreen').classList.add('hidden');
+        document.getElementById('verificationScreen').classList.add('hidden');
+        document.getElementById('appScreen').classList.add('hidden');
+      }
+
+      function showLogin() {
+        document.getElementById('authScreen').classList.add('hidden');
+        document.getElementById('loginScreen').classList.remove('hidden');
+      }
+
+      function showRegister() {
+        document.getElementById('authScreen').classList.add('hidden');
+        document.getElementById('registerScreen').classList.remove('hidden');
+      }
+
+      function showVerification() {
+        document.getElementById('registerScreen').classList.add('hidden');
+        document.getElementById('verificationScreen').classList.remove('hidden');
+      }
+
+      function showApp() {
+        document.getElementById('verificationScreen').classList.add('hidden');
+        document.getElementById('appScreen').classList.remove('hidden');
+      }
+
+      function initDemoLogin() {
+        state.currentUser = defaultUser;
+        saveState(state);
+        showApp();
+        renderApp();
+      }
+
+      function registerUser() {
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value.trim();
+
+        if (!name || !email || password.length < 6) {
+          alert('Bitte alle Felder korrekt ausfüllen. Das Passwort muss mindestens 6 Zeichen haben.');
+          return;
+        }
+
+        const existing = state.users.find(user => user.email.toLowerCase() === email.toLowerCase());
+        if (existing) {
+          alert('Diese E-Mail ist bereits registriert. Bitte einloggen.');
+          return;
+        }
+
+        const code = String(Math.floor(100000 + Math.random() * 900000));
+        const newUser = {
+          id: Date.now(),
+          name,
+          email,
+          password,
+          position: 'Außenverteidiger',
+          age: 18,
+          goal: 'Entscheidungsfindung & Flanken',
+          skills: { technique: 7.4, tactic: 6.8, athlete: 8.1, decision: 6.4 },
+          coachMessages: [
+            { role: 'ai', text: 'Herzlich willkommen. Ich habe dein Profil angelegt und wir starten mit deinem aktuellen Entwicklungsfokus.' }
+          ],
+          training: [
+            { title: 'Flanke + Timing', detail: '12 Wiederholungen · 2 Sätze', done: false },
+            { title: '1v1 Entscheidung', detail: '4 Situationen · Video-Check', done: false },
+            { title: 'Sprint + Ballkontakt', detail: '8 Wiederholungen · Fokus Tempo', done: false },
+            { title: 'Passspiel unter Druck', detail: '6 Minuten · 3 Runden', done: false }
+          ],
+          goals: [
+            { title: 'Saisonziel', value: 'Stabilere Flanken und schnellere Entscheidung', done: false },
+            { title: 'Monatsziel', value: '2x Woche Entscheidungstraining', done: false },
+            { title: 'Wochenziel', value: '30 erfolgreiche Flanken in 3 Szenarien', done: false }
+          ],
+          focus: [
+            'Entscheidungsfindung',
+            'Flanke nach Bewegung',
+            '1v1 defensiv',
+            'Tempo + Wahrnehmung'
+          ]
+        };
+
+        state.users.push(newUser);
+        state.pendingVerification = { email, code };
+        saveState(state);
+
+        document.getElementById('verificationInfo').textContent = `Ein Bestätigungscode wurde an ${email} gesendet. Demo-Modus: ${code}`;
+        showVerification();
+      }
+
+      function confirmRegistration() {
+        const enteredCode = document.getElementById('verificationCode').value.trim();
+        if (!state.pendingVerification) {
+          alert('Keine Bestätigung aktiv. Bitte registriere dich erneut.');
+          return;
+        }
+
+        if (enteredCode !== state.pendingVerification.code) {
+          alert('Der Code ist falsch. Bitte prüfe deine E-Mail und versuche es erneut.');
+          return;
+        }
+
+        const user = state.users.find(u => u.email.toLowerCase() === state.pendingVerification.email.toLowerCase());
+        if (!user) {
+          alert('Benutzer nicht gefunden.');
+          return;
+        }
+
+        state.currentUser = user;
+        state.pendingVerification = null;
+        saveState(state);
+        document.getElementById('verificationCode').value = '';
+        showApp();
+        renderApp();
+      }
+
+      function resendVerification() {
+        if (!state.pendingVerification) {
+          alert('Keine Bestätigung aktiv.');
+          return;
+        }
+        const code = String(Math.floor(100000 + Math.random() * 900000));
+        state.pendingVerification.code = code;
+        saveState(state);
+        document.getElementById('verificationInfo').textContent = `Ein neuer Bestätigungscode wurde gesendet. Demo-Modus: ${code}`;
+      }
+
+      function loginUser() {
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const password = document.getElementById('loginPassword').value.trim();
+
+        if (!email || !password) {
+          alert('Bitte E-Mail und Passwort eingeben.');
+          return;
+        }
+
+        const user = state.users.find(u => u.email.toLowerCase() === email && u.password === password);
+        if (!user) {
+          alert('Login fehlgeschlagen. Bitte prüfe deine Daten.');
+          return;
+        }
+
+        state.currentUser = user;
+        saveState(state);
+        showApp();
+        renderApp();
+      }
+
+      function getCurrentUser() {
+        return state.currentUser || defaultUser;
+      }
+
+      function renderApp() {
+        const user = getCurrentUser();
+        document.getElementById('welcomeTitle').textContent = `Hallo, ${user.name.split(' ')[0] || 'Spieler'}.`;
+        document.getElementById('welcomeSubtitle').textContent = `${user.position || 'Außenverteidiger'} • ${user.goal || 'Entwicklung'}`;
+        document.getElementById('topAvatar').textContent = (user.name || 'S').slice(0,1).toUpperCase();
+
+        const skills = user.skills || { technique: 7.4, tactic: 6.8, athlete: 8.1, decision: 6.4 };
+        document.getElementById('techValue').textContent = Number(skills.technique || 7.4).toFixed(1);
+        document.getElementById('tacticValue').textContent = Number(skills.tactic || 6.8).toFixed(1);
+        document.getElementById('athValue').textContent = Number(skills.athlete || 8.1).toFixed(1);
+
+        const focusList = document.getElementById('focusList');
+        focusList.innerHTML = '';
+        (user.focus || defaultUser.focus).forEach(item => {
+          const task = document.createElement('div');
+          task.className = 'task';
+          task.innerHTML = `
+            <div class="dot"></div>
+            <div class="task-body">
+              <strong>${item}</strong>
+              <span>Aus aktuellem Profil & Entwicklung</span>
+            </div>
+            <span class="status">aktiv</span>
+          `;
+          focusList.appendChild(task);
+        });
+
+        renderCoachMessages(user); 
+        renderTraining(user);
+        renderAnalysis(user);
+        renderGoals(user);
+        renderAgents();
+        renderKnowledge();
+        renderCalendar();
+
+        document.getElementById('profilePosition').value = user.position || 'Außenverteidiger';
+        document.getElementById('profileAge').value = user.age || 18;
+        document.getElementById('profileGoal').value = user.goal || 'Entscheidungsfindung & Flanken';
+      }
+
+      function renderCoachMessages(user) {
+        const messages = document.getElementById('chatMessages');
+        messages.innerHTML = '';
+        (user.coachMessages || []).forEach(msg => {
+          const el = document.createElement('div');
+          el.className = `message ${msg.role === 'user' ? 'user' : 'ai'}`;
+          el.textContent = msg.text;
+          messages.appendChild(el);
+        });
+      }
+
+      function renderTraining(user) {
+        const list = document.getElementById('trainingList');
+        list.innerHTML = '';
+        (user.training || defaultUser.training).forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'mini-item';
+          row.innerHTML = `
+            <div>
+              <strong>${item.title}</strong>
+              <small class="muted">${item.detail}</small>
+            </div>
+            <button class="small-btn ${item.done ? 'ghost-btn' : 'primary-btn'}" data-training="${item.title}">${item.done ? 'Erledigt' : 'Markieren'}</button>
+          `;
+          row.querySelector('button').addEventListener('click', () => toggleTraining(item.title));
+          list.appendChild(row);
+        });
+      }
+
+      function toggleTraining(title) {
+        const user = getCurrentUser();
+        const item = user.training.find(t => t.title === title);
+        if (item) {
+          item.done = !item.done;
+          saveState(state);
+          renderApp();
+        }
+      }
+
+      function renderAnalysis(user) {
+        const list = document.getElementById('analysisList');
+        list.innerHTML = '';
+        const skills = user.skills || defaultUser.skills;
+        const items = [
+          { label: 'Technik', value: Number(skills.technique || 7.4), note: 'Stabil, jedoch noch Lücken in Flanken nach Sprint' },
+          { label: 'Taktik', value: Number(skills.tactic || 6.8), note: 'Spielverständnis gut, Entscheidung noch nicht konstant' },
+          { label: 'Athletik', value: Number(skills.athlete || 8.1), note: 'Sehr starke körperliche Basis' },
+          { label: 'Entscheidung', value: Number(skills.decision || 6.4), note: 'Höchste Priorität für nächsten Trainingsblock' }
+        ];
+
+        items.forEach(item => {
+          const wrap = document.createElement('div');
+          wrap.innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong>${item.label}</strong>
+              <span>${item.value.toFixed(1)}</span>
+            </div>
+            <div class="progress"><span style="width:${Math.min(100, item.value * 10)}%"></span></div>
+            <div class="muted" style="font-size:12px; margin-top:8px;">${item.note}</div>
+          `;
+          list.appendChild(wrap);
+        });
+      }
+
+      function renderGoals(user) {
+        const list = document.getElementById('goalsList');
+        list.innerHTML = '';
+        (user.goals || defaultUser.goals).forEach(goal => {
+          const row = document.createElement('div');
+          row.className = 'mini-item';
+          row.innerHTML = `
+            <div>
+              <strong>${goal.title}</strong>
+              <small class="muted">${goal.value}</small>
+            </div>
+            <span class="status-pill ${goal.done ? 'live' : 'ready'}">${goal.done ? 'Erreicht' : 'Offen'}</span>
+          `;
+          list.appendChild(row);
+        });
+      }
+
+      function renderAgents() {
+        const list = document.getElementById('agentsList');
+        const agents = [
+          ['Chief Coach', 'Lernsystem & Priorisierung', 'live'],
+          ['Technik-Coach', 'Ballkontrolle & Technik', 'live'],
+          ['Flanken-Coach', 'Flanken & Timing', 'ready'],
+          ['Taktik-Coach', 'Positionsspiel & Entscheidungslogik', 'live'],
+          ['Athletik-Coach', 'Tempo, Kraft & Bewegung', 'ready'],
+          ['Mental-Coach', 'Motivation, Fokus & Selbstvertrauen', 'ready']
+        ];
+        list.innerHTML = '';
+        agents.forEach(([name, role, stateTag]) => {
+          const row = document.createElement('div');
+          row.className = 'agent';
+          row.innerHTML = `
+            <div>
+              <strong>${name}</strong>
+              <small>${role}</small>
+            </div>
+            <span class="status-pill ${stateTag === 'live' ? 'live' : 'ready'}">${stateTag === 'live' ? 'aktiv' : 'bereit'}</span>
+          `;
+          list.appendChild(row);
+        });
+      }
+
+      function renderKnowledge() {
+        const list = document.getElementById('knowledgeList');
+        const entries = [
+          'Nach schneller Bewegung steigt die Bedeutung von Timing und Wahl der richtigen Aktion.',
+          'Flanken sind am effektivsten, wenn sie als Entscheidung im richtigen Kontext erfolgen, nicht nur als Wiederholung.',
+          'Stabilität entsteht durch rhythmische Wiederholung mit klarer Zielsetzung und Feedback.',
+          'Bei Blockaden hilft ein Wechsel von Technik zu Entscheidung und Gegenüberstellung von Situationen.'
+        ];
+        list.innerHTML = '';
+        entries.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'mini-item';
+          row.innerHTML = `<div><strong>Wissen</strong><small class="muted">${item}</small></div>`;
+          list.appendChild(row);
+        });
+      }
+
+      function renderCalendar() {
+        const list = document.getElementById('calendarList');
+        const items = [
+          { title: 'Heute', detail: '45 Minuten Training • Fokus: Entscheidungsfindung' },
+          { title: 'Morgen', detail: 'Vereinstraining • 60 Minuten • Aufbau & Passspiel' },
+          { title: 'Freitag', detail: 'Matchprep • 30 Minuten • Flanken, Sprint, 1v1 Decisions' }
+        ];
+        list.innerHTML = '';
+        items.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'mini-item';
+          row.innerHTML = `
+            <div>
+              <strong>${item.title}</strong>
+              <small class="muted">${item.detail}</small>
+            </div>
+          `;
+          list.appendChild(row);
+        });
+      }
+
+      function saveProfile() {
+        const user = getCurrentUser();
+        user.position = document.getElementById('profilePosition').value;
+        user.age = Number(document.getElementById('profileAge').value || 18);
+        user.goal = document.getElementById('profileGoal').value.trim();
+        saveState(state);
+        renderApp();
+        alert('Profil gespeichert.');
+      }
+
+      function sendCoachMessage() {
+        const input = document.getElementById('coachInput');
+        const text = input.value.trim();
+        if (!text) return;
+
+        const user = getCurrentUser();
+        user.coachMessages.push({ role: 'user', text });
+
+        const response = generateCoachReply(text, user);
+        user.coachMessages.push({ role: 'ai', text: response });
+
+        saveState(state);
+        renderCoachMessages(user);
+        input.value = '';
+      }
+
+      function generateCoachReply(text, user) {
+        const lower = text.toLowerCase();
+        if (lower.includes('flanke') || lower.includes('flanken')) {
+          return 'Flanken sind derzeit deutlich besser, wenn sie aus Bewegung und mit klarer Zielwahl erfolgen. Wir fokussieren jetzt auf Timing, Körperposition und die richtige Entscheidung nach dem Sprint.';
+        }
+        if (lower.includes('spiel') || lower.includes('match')) {
+          return 'Für dein nächstes Spiel: starkes Zusammenspiel mit schneller erster Entscheidung, saubere Flanke und sichere Kontinuität nach Ballgewinn. Das ist aktuell der größte Hebel.';
+        }
+        if (lower.includes('problem') || lower.includes('schwäche') || lower.includes('engpass')) {
+          return 'Das größte Problem liegt aktuell in Entscheidungsfindung und Flanke nach Bewegung. Nicht im Ballgefühl an sich, sondern im richtigen Moment und in der richtigen Wahl.';
+        }
+        if (lower.includes('schwieriger') || lower.includes('machen')) {
+          return 'Dann erhöhen wir den Druck: weniger Zeit, klarere Ziele, mehr Gegnerkontakt und ein schnelleren Übergang zwischen Ballannahme und Entscheidung.';
+        }
+        return `Ich sehe bei dir aktuell: ${user.position || 'Außenverteidiger'} mit Fokus auf ${user.goal || 'Entscheidung & Flanken'}. Das nächste Ziel ist systematisch: bessere Entscheidung, bessere Timing und mehr Ruhe im Übergang.`;
+      }
+
+      function setupNav() {
+        document.querySelectorAll('.nav-item').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const target = btn.dataset.target;
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('#appScreen .section').forEach(section => {
+              if (section.id === target) {
+                section.classList.remove('hidden');
+                section.classList.add('active');
+              } else if (section.id !== 'homeView' && section.id !== 'coachView' && section.id !== 'trainingView' && section.id !== 'analysisView' && section.id !== 'goalsView' && section.id !== 'profileView' && section.id !== 'teamView' && section.id !== 'knowledgeView' && section.id !== 'calendarView') {
+                // no-op
+              } else {
+                section.classList.add('hidden');
+                section.classList.remove('active');
+              }
+            });
+            document.getElementById('homeView').classList.add('hidden');
+            document.getElementById('coachView').classList.add('hidden');
+            document.getElementById('trainingView').classList.add('hidden');
+            document.getElementById('analysisView').classList.add('hidden');
+            document.getElementById('goalsView').classList.add('hidden');
+            document.getElementById('profileView').classList.add('hidden');
+            document.getElementById('teamView').classList.add('hidden');
+            document.getElementById('knowledgeView').classList.add('hidden');
+            document.getElementById('calendarView').classList.add('hidden');
+            document.getElementById(target).classList.remove('hidden');
+            document.getElementById(target).classList.add('active');
           });
         });
       }
+
+      document.getElementById('showLoginBtn').addEventListener('click', showLogin);
+      document.getElementById('showRegisterBtn').addEventListener('click', showRegister);
+      document.getElementById('backToAuthBtn').addEventListener('click', showAuth);
+      document.getElementById('backToAuth2Btn').addEventListener('click', showAuth);
+      document.getElementById('loginBtn').addEventListener('click', loginUser);
+      document.getElementById('registerBtn').addEventListener('click', registerUser);
+      document.getElementById('confirmBtn').addEventListener('click', confirmRegistration);
+      document.getElementById('resendBtn').addEventListener('click', resendVerification);
+      document.getElementById('startTrainingBtn').addEventListener('click', () => {
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        document.querySelector('[data-target="trainingView"]').classList.add('active');
+        document.querySelectorAll('#appScreen .section').forEach(sec => {
+          if (sec.id === 'trainingView') {
+            sec.classList.remove('hidden');
+            sec.classList.add('active');
+          } else if (sec.id !== 'appScreen') {
+            sec.classList.add('hidden');
+            sec.classList.remove('active');
+          }
+        });
+      });
+      document.getElementById('aiCoachBtn').addEventListener('click', () => {
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        document.querySelector('[data-target="coachView"]').classList.add('active');
+        document.querySelectorAll('#appScreen .section').forEach(sec => {
+          if (sec.id === 'coachView') {
+            sec.classList.remove('hidden');
+            sec.classList.add('active');
+          } else if (sec.id !== 'appScreen') {
+            sec.classList.add('hidden');
+            sec.classList.remove('active');
+          }
+        });
+      });
+      document.getElementById('sendCoachBtn').addEventListener('click', sendCoachMessage);
+      document.getElementById('profilePosition').addEventListener('change', saveProfile);
+      document.getElementById('profileAge').addEventListener('change', saveProfile);
+      document.getElementById('profileGoal').addEventListener('change', saveProfile);
+      document.getElementById('saveProfileBtn').addEventListener('click', saveProfile);
+
+      setupNav();
+      renderApp();
+      showAuth();
+      initDemoLogin();
     </script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
