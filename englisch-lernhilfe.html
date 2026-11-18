@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Englisch-Lernhilfe – Klasse 8</title>
+  <style>
+    :root {
+      --blue: #2457a7;
+      --pale: #eef4ff;
+      --green: #187447;
+      --red: #b42318;
+      --ink: #202938;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #f5f7fb;
+      color: var(--ink);
+      font: 16px/1.55 system-ui, sans-serif;
+    }
+
+    header {
+      background: var(--blue);
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+
+    header h1 { margin: 0 0 .25rem; }
+
+    main {
+      max-width: 900px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+
+    button, .tab {
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font: inherit;
+      padding: .65rem .9rem;
+    }
+
+    .tab {
+      background: #e3e9f4;
+      color: var(--ink);
+    }
+
+    .tab.active {
+      background: var(--blue);
+      color: white;
+    }
+
+    button.action {
+      background: var(--blue);
+      color: white;
+      margin: .5rem .35rem .5rem 0;
+    }
+
+    button.secondary {
+      background: #e3e9f4;
+      color: var(--ink);
+      margin: .5rem .35rem .5rem 0;
+    }
+
+    section.panel {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #172b4d12;
+      padding: 1.25rem;
+    }
+
+    .passage, .listen-text {
+      background: var(--pale);
+      border-left: 4px solid var(--blue);
+      border-radius: 6px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .question {
+      border-top: 1px solid #e4e8ef;
+      padding: .8rem 0;
+    }
+
+    .question p { margin: 0 0 .45rem; }
+
+    label.option {
+      display: block;
+      padding: .22rem 0;
+      cursor: pointer;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      padding: .8rem;
+      border: 1px solid #aeb8c7;
+      border-radius: 8px;
+      font: inherit;
+    }
+
+    .feedback { font-weight: 700; margin-top: .75rem; }
+    .good { color: var(--green); }
+    .bad { color: var(--red); }
+    .small { color: #536176; font-size: .92rem; }
+    .hidden { display: none; }
+
+    ul.checklist { padding-left: 1.3rem; }
+
+    @media (max-width: 540px) {
+      nav { display: grid; grid-template-columns: 1fr 1fr; }
+      .tab { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Englisch-Lernhilfe</h1>
+    <div>Klasse 8 · Üben für die Arbeit</div>
+  </header>
+
+  <main>
+    <nav aria-label="Lernbereiche">
+      <button class="tab active" data-panel="reading">Reading</button>
+      <button class="tab" data-panel="listening">Listening</button>
+      <button class="tab" data-panel="writing">Writing a comment</button>
+      <button class="tab" data-panel="grammar">Grammar</button>
+    </nav>
+
+    <section class="panel" id="reading">
+      <h2>Reading comprehension</h2>
+      <p>Lies den Text und beantworte anschließend die Fragen.</p>
+
+      <div class="passage">
+        <h3>A greener school</h3>
+        <p>
+          Last year, students at Greenhill School noticed that their school
+          produced a lot of rubbish. Mia and her friend Leo started a
+          recycling club. At first, only six students joined. They put
+          recycling boxes in every classroom and made posters explaining
+          what could be recycled.
+        </p>
+        <p>
+          After a few months, more students became interested. The club has
+          also planted flowers in the school garden. Mia says that small
+          actions can make a big difference. Next term, the students are
+          going to ask the headteacher for a place to grow vegetables.
+        </p>
+      </div>
+
+      <div id="reading-quiz"></div>
+      <button class="action" onclick="checkQuiz('reading-quiz')">Antworten prüfen</button>
+      <div id="reading-result" class="feedback" aria-live="polite"></div>
+    </section>
+
+    <section class="panel hidden" id="listening">
+      <h2>Listening comprehension</h2>
+      <p>
+        Höre dir den Dialog an. Du kannst ihn mehrmals abspielen.
+        Beantworte die Fragen, bevor du den Text einblendest.
+      </p>
+      <button class="action" onclick="speakListening()">🔊 Text vorlesen</button>
+      <button class="secondary" onclick="toggleTranscript()">Text ein-/ausblenden</button>
+
+      <div id="transcript" class="listen-text hidden">
+        <strong>At the school café</strong>
+        <p>
+          Alex: Have you tried the new school café, Sam?<br>
+          Sam: Yes, I went there yesterday. They sell sandwiches and fruit.<br>
+          Alex: Have they got any vegetarian food?<br>
+          Sam: Yes. I had a cheese sandwich. It was really good.<br>
+          Alex: Great! I have been bringing lunch from home all week, but
+          tomorrow I’ll try the café.
+        </p>
+      </div>
+
+      <div id="listening-quiz"></div>
+      <button class="action" onclick="checkQuiz('listening-quiz')">Antworten prüfen</button>
+      <div id="listening-result" class="feedback" aria-live="polite"></div>
+    </section>
+
+    <section class="panel hidden" id="writing">
+      <h2>Writing a comment</h2>
+      <p><strong>Topic:</strong> “Schools should have a longer lunch break.” What do you think?</p>
+      <p>Schreibe einen kurzen Comment auf Englisch. Begründe deine Meinung und nenne mindestens ein Beispiel.</p>
+
+      <ul class="checklist">
+        <li>Beginne mit deiner Meinung: <em>In my opinion… / I believe…</em></li>
+        <li>Nenne mindestens zwei Gründe: <em>Firstly… / Also…</em></li>
+        <li>Gib ein Beispiel: <em>For example…</em></li>
+        <li>Schließe mit einem Fazit: <em>To sum up…</em></li>
+        <li>Prüfe Rechtschreibung, Zeitformen und Satzzeichen.</li>
+      </ul>
+
+      <label for="comment"><strong>Your comment:</strong></label>
+      <textarea id="comment" placeholder="In my opinion, ..."></textarea>
+      <p id="word-count" class="small">0 Wörter</p>
+      <button class="secondary" onclick="countWords()">Wörter zählen</button>
+      <p class="small">Tipp: Ein guter Comment hat eine klare Meinung, passende Gründe und eine verständliche Struktur.</p>
+    </section>
+
+    <section class="panel hidden" id="grammar">
+      <h2>Grammar practice</h2>
+      <p>Wähle die richtige Antwort. Es gibt Fragen zu allen Grammatikthemen deiner Arbeit.</p>
+      <div id="grammar-quiz"></div>
+      <button class="action" onclick="checkQuiz('grammar-quiz')">Antworten prüfen</button>
+      <div id="grammar-result" class="feedback" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script>
+    const quizzes = {
+      "reading-quiz": [
+        {
+          question: "Why did Mia and Leo start a recycling club?",
+          options: [
+            "They wanted to win a school competition.",
+            "They noticed the school produced a lot of rubbish.",
+            "The headteacher asked them to do it."
+          ],
+          answer: 1
+        },
+        {
+          question: "How many students joined at first?",
+          options: ["Six", "Sixteen", "Twenty"],
+          answer: 0
+        },
+        {
+          question: "What do the students want to do next term?",
+          options: [
+            "Build a new classroom.",
+            "Sell flowers.",
+            "Grow vegetables."
+          ],
+          answer: 2
+        }
+      ],
+
+      "listening-quiz": [
+        {
+          question: "When did Sam go to the school café?",
+          options: ["Yesterday", "Last week", "This morning"],
+          answer: 0
+        },
+        {
+          question: "What did Sam eat?",
+          options: ["A fruit salad", "A cheese sandwich", "A burger"],
+          answer: 1
+        },
+        {
+          question: "What has Alex been doing all week?",
+          options: [
+            "Buying lunch at the café.",
+            "Bringing lunch from home.",
+            "Eating lunch with Sam."
+          ],
+          answer: 1
+        }
+      ],
+
+      "grammar-quiz": [
+        {
+          question: "1. She ___ for the bus for twenty minutes.",
+          options: ["has waited", "has been waiting", "is waited"],
+          answer: 1
+        },
+        {
+          question: "2. I ___ three pages of my book so far.",
+          options: ["have read", "have been read", "am reading"],
+          answer: 0
+        },
+        {
+          question: "3. “I am tired,” Ben said. → Ben said that he ___ tired.",
+          options: ["is", "was", "has been"],
+          answer: 1
+        },
+        {
+          question: "4. The teacher says, “The Earth goes around the Sun.” → The teacher says that the Earth ___ around the Sun.",
+          options: ["went", "has gone", "goes"],
+          answer: 2
+        },
+        {
+          question: "5. When we arrived at the station, the train ___.",
+          options: ["left", "had already left", "has already left"],
+          answer: 1
+        },
+        {
+          question: "6. We ___ our cousins last weekend.",
+          options: ["have visited", "had visited", "visited"],
+          answer: 2
+        },
+        {
+          question: "7. He ___ his homework, so he can go out now.",
+          options: ["has finished", "has been finishing", "finished yesterday"],
+          answer: 0
+        },
+        {
+          question: "8. It ___ all morning, and the ground is still wet.",
+          options: ["has rained", "has been raining", "rained"],
+          answer: 1
+        },
+        {
+          question: "9. “We have lost the game,” they said. → They said that they ___ the game.",
+          options: ["have lost", "had lost", "lost tomorrow"],
+          answer: 1
+        },
+        {
+          question: "10. By the time Ella got home, her brother ___ dinner.",
+          options: ["cooked", "has cooked", "had cooked"],
+          answer: 2
+        }
+      ]
+    };
+
+    function renderQuiz(containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = quizzes[containerId].map((item, index) => `
+        <div class="question">
+          <p><strong>${item.question}</strong></p>
+          ${item.options.map((option, optionIndex) => `
+            <label class="option">
+              <input type="radio" name="${containerId}-${index}" value="${optionIndex}">
+              ${option}
+            </label>
+          `).join("")}
+        </div>
+      `).join("");
+    }
+
+    function checkQuiz(containerId) {
+      const questions = quizzes[containerId];
+      let score = 0;
+      let unanswered = 0;
+
+      questions.forEach((question, index) => {
+        const selected = document.querySelector(
+          `input[name="${containerId}-${index}"]:checked`
+        );
+
+        if (!selected) {
+          unanswered++;
+        } else if (Number(selected.value) === question.answer) {
+          score++;
+        }
+      });
+
+      const result = document.getElementById(containerId.replace("-quiz", "-result"));
+      const message = unanswered
+        ? `Du hast ${score} von ${questions.length} richtig. Noch ${unanswered} ${unanswered === 1 ? "Frage" : "Fragen"} unbeantwortet.`
+        : `Du hast ${score} von ${questions.length} richtig!`;
+
+      result.textContent = message;
+      result.className = "feedback " + (score === questions.length ? "good" : "bad");
+    }
+
+    function speakListening() {
+      if (!("speechSynthesis" in window)) {
+        alert("Die Sprachausgabe wird von diesem Browser leider nicht unterstützt. Blende stattdessen den Text ein.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      const text = document.getElementById("transcript").innerText;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-GB";
+      utterance.rate = 0.85;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function toggleTranscript() {
+      document.getElementById("transcript").classList.toggle("hidden");
+    }
+
+    function countWords() {
+      const text = document.getElementById("comment").value.trim();
+      const count = text ? text.split(/\s+/).length : 0;
+      document.getElementById("word-count").textContent = `${count} Wörter`;
+    }
+
+    document.querySelectorAll(".tab").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+        document.querySelectorAll(".panel").forEach(panel => panel.classList.add("hidden"));
+        button.classList.add("active");
+        document.getElementById(button.dataset.panel).classList.remove("hidden");
+      });
+    });
+
+    renderQuiz("reading-quiz");
+    renderQuiz("listening-quiz");
+    renderQuiz("grammar-quiz");
+  </script>
+</body>
+</html>
